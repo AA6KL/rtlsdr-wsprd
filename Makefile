@@ -1,6 +1,7 @@
 CC = clang
 CFLAGS = -O3 -std=gnu17
-LIBS = -lusb-1.0 -lrtlsdr -lpthread -lfftw3f -lcurl -lm
+LIBS = -lusb-1.0 -lrtlsdr -lpthread -lfftw3f -lcurl -lm L/usr/lib/x86_64-linux-gnu/
+INCLUDES = -I../rtl-sdr/include
 
 # Note
 #   gcc is a bit faster that clang on this app
@@ -29,7 +30,7 @@ TARGETS = rtlsdr_wsprd
 all: $(TARGETS)
 
 %.o: %.c
-	${CC} ${CFLAGS} $(EXTRA_OPTS) -c $< -o $@
+	${CC} ${CFLAGS} $(EXTRA_OPTS) $(INCLUDES) -c $< -o $@
 
 rtlsdr_wsprd: $(OBJS)
 	$(CC) -o $@ $^ $(LIBS)
